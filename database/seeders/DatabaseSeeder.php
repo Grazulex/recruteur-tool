@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         Group::factory()->create([
             'name' => 'Admins',
             'description' => 'Administrators group',
-            "group_type" => GroupType::COMPANY,
+            'group_type' => GroupType::COMPANY,
             'user_id' => $admin->id,
         ]);
     }

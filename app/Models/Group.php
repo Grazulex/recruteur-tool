@@ -18,22 +18,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Group extends Model
 {
-    /** @use HasFactory<\Database\Factories\GroupFactory> */
-    use HasFactory;
     use GenerateUniqueSlugTrait;
 
-    protected $fillable = [
-        "name",
-        "slug",
-        "group_type",
-        "description",
-        "user_id",
-    ];
+    /** @use HasFactory<\Database\Factories\GroupFactory> */
+    use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'group_type',
+        'description',
+        'user_id',
+    ];
 
     public $casts = [
         'group_type' => GroupType::class,
-    ];  
+    ];
 
     public function user(): BelongsTo
     {

@@ -28,19 +28,19 @@ trait GenerateUniqueSlugTrait
         // Check if the modified slug already exists in the table
         $existingSlugs = $this->getExistingSlugs($slug, $this->getTable());
 
-        if (!in_array($slug, $existingSlugs)) {
+        if (! in_array($slug, $existingSlugs)) {
             // Slug is unique, no need to append numbers
-            return $slug . ($slugNumber ? "-$slugNumber" : '');
+            return $slug.($slugNumber ? "-$slugNumber" : '');
         }
 
         // Increment the number until a unique slug is found
         $i = $slugNumber ? ($slugNumber + 1) : 1;
         $uniqueSlugFound = false;
 
-        while (!$uniqueSlugFound) {
-            $newSlug = $slug . '-' . $i;
+        while (! $uniqueSlugFound) {
+            $newSlug = $slug.'-'.$i;
 
-            if (!in_array($newSlug, $existingSlugs)) {
+            if (! in_array($newSlug, $existingSlugs)) {
                 // Unique slug found
                 return $newSlug;
             }
@@ -49,12 +49,12 @@ trait GenerateUniqueSlugTrait
         }
 
         // Fallback: return the original slug with a random number appended
-        return $originalSlug . '-' . mt_rand(1000, 9999);
+        return $originalSlug.'-'.mt_rand(1000, 9999);
     }
 
     private function getExistingSlugs(string $slug, string $table): array
     {
-        return $this->where('slug', 'LIKE', $slug . '%')
+        return $this->where('slug', 'LIKE', $slug.'%')
             ->where('id', '!=', $this->id ?? null) // Exclude the current model's ID
             ->pluck('slug')
             ->toArray();

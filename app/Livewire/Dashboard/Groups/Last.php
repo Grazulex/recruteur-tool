@@ -12,7 +12,7 @@ class Last extends Component
 
     public function mount()
     {
-        $this->groups = Group::where('user_id',Auth::user()->id)->orderBy("created_at","desc")->get();;
+        $this->groups = Group::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
     }
 
     public function render()

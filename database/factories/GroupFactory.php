@@ -19,10 +19,10 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            "name"=> $this->faker->name,
-            "description"=> $this->faker->text,
-            "group_type" => $this->faker->randomElement(GroupType::cases()),
-            "user_id"=> User::factory(),
+            'name' => $this->faker->name,
+            'description' => $this->faker->text,
+            'group_type' => $this->faker->randomElement(GroupType::cases()),
+            'user_id' => User::factory(),
         ];
     }
 }
