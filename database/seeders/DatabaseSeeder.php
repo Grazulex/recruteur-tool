@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Enums\GroupType;
-use App\Models\Group;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,11 +21,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'jms@grazulex.be',
         ]);
 
-        Group::factory()->create([
-            'name' => 'Admins',
-            'description' => 'Administrators group',
-            'group_type' => GroupType::COMPANY,
-            'user_id' => $admin->id,
-        ]);
     }
 }

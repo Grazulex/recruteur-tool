@@ -2,18 +2,16 @@
 
 namespace App\Enums;
 
-enum GroupType: string
+enum RoleUser: string
 {
     case CANDIDATE = 'candidate';
-    case AGENCY = 'agency';
-    case COMPANY = 'company';
+    case ADMIN = 'admin';
 
     public function getLabel(): string
     {
         return match ($this) {
             self::CANDIDATE => 'Candidate',
-            self::AGENCY => 'Agency',
-            self::COMPANY => 'Company',
+            self::ADMIN => 'Admin',
         };
     }
 }

@@ -7,6 +7,7 @@ use App\Traits\GenerateUniqueSlugTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property string $name
@@ -14,7 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $description
  * @property GroupType $group_type
  * @property int $user_id
- * @property User $user
+ * @property User $owner
+ * @property User[] $users
  */
 class Group extends Model
 {
@@ -35,8 +37,20 @@ class Group extends Model
         'group_type' => GroupType::class,
     ];
 
-    public function user(): BelongsTo
+    public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            related: User::class,
+            table: 'group_user'
+        )
+            ->withPivot(
+                columns: 'role'
+            )
+            ->withTimestamps();
     }
 }

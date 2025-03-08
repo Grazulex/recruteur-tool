@@ -2,13 +2,14 @@
 
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 trait GenerateUniqueSlugTrait
 {
     public static function bootGenerateUniqueSlugTrait(): void
     {
-        static::saving(function ($model) {
+        static::saving(function (Model $model) {
             $slug = str::slug($model->name);
             $model->slug = $model->generateUniqueSlug($slug);
         });

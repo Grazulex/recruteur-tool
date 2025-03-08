@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use App\Traits\CreateDefaultGroupTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -12,7 +16,7 @@ use Illuminate\Support\Str;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use CreateDefaultGroupTrait, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -68,8 +72,23 @@ class User extends Authenticatable implements MustVerifyEmail
             ->implode('');
     }
 
+    public function ownedGroups(): HasMany
+    {
+        return $this->hasMany(
+            related: Group::class,
+            foreignKey: 'user_id'
+        );
+    }
+
     public function groups(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(
+            related: Group::class,
+            table: 'group_user'
+        )
+            ->withPivot(
+                columns: 'role'
+            )
+            ->withTimestamps();
     }
 }
