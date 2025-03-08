@@ -3,6 +3,7 @@
 namespace App\Livewire\Groups;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -10,11 +11,21 @@ class Listing extends Component
 {
     use WithPagination;
 
+    public $groups;
+
+    public function mount()
+    {
+        $this->groups = Auth::user()->groups()->get();
+    }
+
     public function render()
     {
-        $groups = Auth::user()->groups()->paginate(10);
+        return view('livewire.groups.listing');
+    }
 
-        return view('livewire.groups.listing', compact('groups'));
-
+    #[On('refresh-groups-listing')]
+    public function reloadGroups()
+    {
+        $this->groups = Auth::user()->groups()->get();
     }
 }

@@ -6,14 +6,20 @@
             <flux:subheading size="lg" class="mb-6">{{ __('Manage your groups and invitations') }}</flux:subheading>
         </div>
         <flux:spacer />
-        <flux:button icon="pencil-square" variant="filled">{{ __('New group') }}</flux:button>
+        <flux:modal.trigger name="create-group">
+            <flux:button icon="pencil-square" variant="filled">{{ __('New group') }}</flux:button>
+        </flux:modal.trigger>
+
+        <livewire:groups.create />
+
     </div>
 
     <flux:separator variant="subtle" />
 
-    <flux:table :paginate="$groups">
+    <flux:table>
         <flux:table.columns>
             <flux:table.column>{{ __('Type') }}</flux:table.column>
+            <flux:table.column>{{ __('Role') }}</flux:table.column>
             <flux:table.column>{{ __('Name') }}</flux:table.column>
             <flux:table.column>{{ __('Description') }}</flux:table.column>
             <flux:table.column>{{ __('Creation') }}</flux:table.column>
@@ -25,9 +31,11 @@
             @foreach ($groups as $group)
                 <flux:table.row :key="$group->id">
                     <flux:table.cell>
-                        <flux:badge color="{{ $group->group_type->getColor() }}">{{ $group->group_type->getLabel() }}
+                        <flux:badge size="sm" color="{{ $group->group_type->getColor() }}">
+                            {{ $group->group_type->getLabel() }}
                         </flux:badge>
                     </flux:table.cell>
+                    <flux:table.cell>{{ $group->role }}</flux:table.cell>
                     <flux:table.cell variant="strong">{{ $group->name }}</flux:table.cell>
                     <flux:table.cell>{{ $group->description }}</flux:table.cell>
                     <flux:table.cell>{{ $group->created_at->diffForHumans() }}</flux:table.cell>
