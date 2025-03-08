@@ -16,4 +16,13 @@ enum GroupType: string
             self::COMPANY => 'Company',
         };
     }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::CANDIDATE => 'red',
+            self::AGENCY => 'blue',
+            self::COMPANY => 'green',
+        };
+    }
 }
