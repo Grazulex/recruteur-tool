@@ -6,7 +6,7 @@
             <flux:subheading size="lg" class="mb-6">{{ __('Manage your groups and invitations') }}</flux:subheading>
         </div>
         <flux:spacer />
-        <flux:button icon="pencil-square">{{ __('New group') }}</flux:button>
+        <flux:button icon="pencil-square" variant="filled">{{ __('New group') }}</flux:button>
     </div>
 
     <flux:separator variant="subtle" />
@@ -33,7 +33,7 @@
                     <flux:table.cell>{{ $group->created_at->diffForHumans() }}</flux:table.cell>
                     <flux:table.cell>
                         <flux:button.group>
-                            <flux:button icon="pencil" size="sm"></flux:button>
+                            <flux:button icon="pencil" size="sm" variant="filled"></flux:button>
                             <flux:button icon="trash" variant="danger" size="sm"></flux:button>
                         </flux:button.group>
                     </flux:table.cell>
