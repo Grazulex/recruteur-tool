@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Enums\GroupType;
 use App\Models\Group;
 use App\Models\User;
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
@@ -10,16 +10,18 @@ test("can create group", function () {
 
     $this->actingAs($user);
 
-    $group = Group::create([
+    $group = Group::factory()->create([
         "name"=> "Admin_test",
         "description"=> "Administrators group",
         "user_id"=> $user->id,
+        "group_type" => GroupType::AGENCY,
     ]);
 
     expect($group->name)->toEqual("Admin_test");
     expect($group->description)->toEqual("Administrators group");
     expect($group->user_id)->toEqual($user->id);
     expect($group->slug)->toEqual("admin-test");
+    expect($group->group_type)->toEqual(GroupType::AGENCY);
 });
 
 test("create group with same slug", function () {

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\GroupType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,6 +21,7 @@ class GroupFactory extends Factory
         return [
             "name"=> $this->faker->name,
             "description"=> $this->faker->text,
+            "group_type" => $this->faker->randomElement(GroupType::cases()),
             "user_id"=> User::factory(),
         ];
     }
