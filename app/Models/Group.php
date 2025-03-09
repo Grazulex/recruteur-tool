@@ -10,13 +10,32 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
+ * @property int $id
  * @property string $name
  * @property string $slug
- * @property string $description
+ * @property string|null $description
  * @property GroupType $group_type
  * @property int $user_id
- * @property User $owner
- * @property User[] $users
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
+ * @property-read int|null $users_count
+ *
+ * @method static \Database\Factories\GroupFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereGroupType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereUserId($value)
+ *
+ * @mixin \Eloquent
  */
 class Group extends Model
 {

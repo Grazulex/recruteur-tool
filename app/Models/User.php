@@ -14,14 +14,37 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
 /**
+ * @property int $id
  * @property string $firstname
  * @property string $lastname
  * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
- * @property string $remember_token
- * @property \Carbon\Carbon $email_verified_at
- * @property \Illuminate\Database\Eloquent\Collection<Group> $ownedGroups
- * @property \Illuminate\Database\Eloquent\Collection<Group> $groups
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Group> $groups
+ * @property-read int|null $groups_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Group> $ownedGroups
+ * @property-read int|null $owned_groups_count
+ *
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereFirstname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ *
+ * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Groups;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -13,9 +14,12 @@ class Listing extends Component
 
     public $groups;
 
+    private $user;
+
     public function mount()
     {
-        $this->groups = Auth::user()->groups()->get();
+        $this->user = User::find(Auth::user()->id);
+        $this->groups = $this->user->groups()->get();
     }
 
     public function render()
@@ -26,6 +30,7 @@ class Listing extends Component
     #[On('refresh-groups-listing')]
     public function reloadGroups()
     {
-        $this->groups = Auth::user()->groups()->get();
+        $this->user = User::find(Auth::user()->id);
+        $this->groups = $this->user->groups()->get();
     }
 }
