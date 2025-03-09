@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Enums\GroupType;
+use App\Enums\RoleUser;
 use App\Traits\GenerateUniqueSlugTrait;
+use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -71,5 +73,14 @@ class Group extends Model
                 columns: 'role'
             )
             ->withTimestamps();
+    }
+
+    public function my_role(): RoleUser
+    {
+        $role_string = $this->users()->wherePivot('user_id', Auth::user()->id)->first()->pivot->role;
+        $role_enum = RoleUser::from($role_string);
+
+        return $role_enum;
+
     }
 }

@@ -59,7 +59,11 @@
                             {{ $group->group_type->getLabel() }}
                         </flux:badge>
                     </flux:table.cell>
-                    <flux:table.cell>{{ $group->role }}</flux:table.cell>
+                    <flux:table.cell>
+                        <flux:badge size="sm" color="{{ $group->my_role()->getColor() }}">
+                            {{ $group->my_role()->getLabel() }}
+                        </flux:badge>
+                    </flux:table.cell>
                     <flux:table.cell variant="strong">{{ $group->name }}</flux:table.cell>
                     <flux:table.cell>{{ $group->description }}</flux:table.cell>
                     <flux:table.cell>{{ $group->created_at->diffForHumans() }}</flux:table.cell>

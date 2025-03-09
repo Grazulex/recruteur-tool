@@ -14,4 +14,12 @@ enum RoleUser: string
             self::ADMIN => 'Admin',
         };
     }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::CANDIDATE => 'amber',
+            self::ADMIN => 'fuchsia',
+        };
+    }
 }
