@@ -40,12 +40,15 @@ class Listing extends Component
 
     public function edit(int $id)
     {
+        $this->group = Group::find($id);
+        $this->authorize('update', $this->group);
         $this->dispatch('edit-group', $id);
     }
 
     public function delete(int $id)
     {
         $this->group = Group::find($id);
+        $this->authorize('delete', $this->group);
         Flux::modal('delete-group')->show();
     }
 

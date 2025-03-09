@@ -69,10 +69,14 @@
                     <flux:table.cell>{{ $group->created_at->diffForHumans() }}</flux:table.cell>
                     <flux:table.cell>
                         <flux:button.group>
-                            <flux:button wire:click="edit({{ $group->id }})" icon="pencil" size="sm" variant="filled">
-                            </flux:button>
-                            <flux:button wire:click="delete({{ $group->id }})" icon="trash" variant="danger" size="sm">
-                            </flux:button>
+                            @can('update', $group)
+                                <flux:button wire:click="edit({{ $group->id }})" icon="pencil" size="sm" variant="filled">
+                                </flux:button>
+                            @endcan
+                            @can('delete', $group)
+                                <flux:button wire:click="delete({{ $group->id }})" icon="trash" variant="danger" size="sm">
+                                </flux:button>
+                            @endcan
                         </flux:button.group>
                     </flux:table.cell>
                 </flux:table.row>

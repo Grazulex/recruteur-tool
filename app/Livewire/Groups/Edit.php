@@ -33,6 +33,9 @@ class Edit extends Component
     public function editGroup(int $id)
     {
         $this->group = Group::find($id);
+
+        $this->authorize('update', $this->group);
+
         $this->form->fill($this->group);
 
         Flux::modal('edit-group')->show();
