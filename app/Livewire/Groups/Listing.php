@@ -33,4 +33,9 @@ class Listing extends Component
         $this->user = User::find(Auth::user()->id);
         $this->groups = $this->user->groups()->get();
     }
+
+    public function edit(int $id)
+    {
+        $this->dispatch('edit-group', $id);
+    }
 }

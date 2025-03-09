@@ -4,7 +4,7 @@ namespace App\Livewire\Groups;
 
 use App\Enums\GroupType;
 use App\Livewire\Forms\GroupForm;
-use Flux\Flux;
+use Flux;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -22,9 +22,12 @@ class Create extends Component
     {
         $groupTypes = GroupType::cases();
 
-        return view('livewire.groups.create', [
-            'groupTypes' => $groupTypes,
-        ]);
+        return view(
+            view: 'livewire.groups.create',
+            data: [
+                'groupTypes' => $groupTypes,
+            ]
+        );
     }
 
     public function create()

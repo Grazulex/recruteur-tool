@@ -11,6 +11,7 @@
         </flux:modal.trigger>
 
         <livewire:groups.create />
+        <livewire:groups.edit />
 
     </div>
 
@@ -41,7 +42,8 @@
                     <flux:table.cell>{{ $group->created_at->diffForHumans() }}</flux:table.cell>
                     <flux:table.cell>
                         <flux:button.group>
-                            <flux:button icon="pencil" size="sm" variant="filled"></flux:button>
+                            <flux:button wire:click="edit({{ $group->id }})" icon="pencil" size="sm" variant="filled">
+                            </flux:button>
                             <flux:button icon="trash" variant="danger" size="sm"></flux:button>
                         </flux:button.group>
                     </flux:table.cell>

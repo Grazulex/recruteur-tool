@@ -37,4 +37,11 @@ class GroupForm extends Form
         $group = Group::create($this->all());
         $group->users()->attach(Auth::user());
     }
+
+    public function update(Group $group)
+    {
+        $this->validate();
+
+        $group->update($this->all());
+    }
 }
