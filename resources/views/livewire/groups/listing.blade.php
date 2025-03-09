@@ -46,7 +46,7 @@
             <flux:table.column>{{ __('Role') }}</flux:table.column>
             <flux:table.column>{{ __('Name') }}</flux:table.column>
             <flux:table.column>{{ __('Description') }}</flux:table.column>
-            <flux:table.column>{{ __('Creation') }}</flux:table.column>
+            <flux:table.column>{{ __('Member(s)') }}</flux:table.column>
             <flux:table.column>{{ __('Actions') }}</flux:table.column>
         </flux:table.columns>
 
@@ -66,7 +66,9 @@
                     </flux:table.cell>
                     <flux:table.cell variant="strong">{{ $group->name }}</flux:table.cell>
                     <flux:table.cell>{{ $group->description }}</flux:table.cell>
-                    <flux:table.cell>{{ $group->created_at->diffForHumans() }}</flux:table.cell>
+                    <flux:table.cell>
+                        <flux:badge as="button" variant="pill" icon="user" size="sm">{{ $group->users_count }}</flux:badge>
+                    </flux:table.cell>
                     <flux:table.cell>
                         <flux:button.group>
                             @can('update', $group)

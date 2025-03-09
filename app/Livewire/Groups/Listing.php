@@ -23,7 +23,7 @@ class Listing extends Component
     public function mount()
     {
         $this->user = User::find(Auth::user()->id);
-        $this->groups = $this->user->groups()->get();
+        $this->groups = $this->user->groups()->withCount('users')->get();
     }
 
     public function render()
@@ -35,7 +35,7 @@ class Listing extends Component
     public function reloadGroups()
     {
         $this->user = User::find(Auth::user()->id);
-        $this->groups = $this->user->groups()->get();
+        $this->groups = $this->user->groups()->withCount('users')->get();
     }
 
     public function edit(int $id)
