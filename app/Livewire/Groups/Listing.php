@@ -53,7 +53,7 @@ class Listing extends Component
     {
         $this->group->delete();
 
-        $this->dispatch('refresh-groups-listing');
+        $this->reloadGroups();
 
         Flux::toast(variant: 'success', heading: 'Group', text: 'Your group have been deleted.');
 
