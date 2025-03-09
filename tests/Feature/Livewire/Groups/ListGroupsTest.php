@@ -32,7 +32,7 @@ it('can edit a group', function () {
     $group_new_description = 'New Group Description';
 
     livewire::actingAs($user)->test(Edit::class)
-        ->call('editGroup', $group->id)
+        ->call('edit', $group->id)
         ->set('form.group_type', GroupType::COMPANY)
         ->set('form.name', $group_new_name)
         ->set('form.description', $group_new_description)

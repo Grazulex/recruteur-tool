@@ -30,7 +30,7 @@ class Edit extends Component
     }
 
     #[On('edit-group')]
-    public function editGroup(int $id)
+    public function edit(int $id)
     {
         $this->group = Group::find($id);
 
