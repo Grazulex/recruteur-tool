@@ -13,6 +13,29 @@
         <livewire:groups.create />
         <livewire:groups.edit />
 
+        <flux:modal name="delete-group" class="min-w-[22rem]">
+            <div class="space-y-6">
+                <div>
+                    <flux:heading size="lg">Delete group?</flux:heading>
+
+                    <flux:subheading>
+                        <p>You're about to delete this group.</p>
+                        <p>This action cannot be reversed.</p>
+                    </flux:subheading>
+                </div>
+
+                <div class="flex gap-2">
+                    <flux:spacer />
+
+                    <flux:modal.close>
+                        <flux:button variant="ghost">Cancel</flux:button>
+                    </flux:modal.close>
+
+                    <flux:button wire:click="destroy()" type="submit" variant="danger">Delete group</flux:button>
+                </div>
+            </div>
+        </flux:modal>
+
     </div>
 
     <flux:separator variant="subtle" />
@@ -44,7 +67,8 @@
                         <flux:button.group>
                             <flux:button wire:click="edit({{ $group->id }})" icon="pencil" size="sm" variant="filled">
                             </flux:button>
-                            <flux:button icon="trash" variant="danger" size="sm"></flux:button>
+                            <flux:button wire:click="delete({{ $group->id }})" icon="trash" variant="danger" size="sm">
+                            </flux:button>
                         </flux:button.group>
                     </flux:table.cell>
                 </flux:table.row>

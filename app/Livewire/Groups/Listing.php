@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Groups;
 
+use App\Models\Group;
 use App\Models\User;
+use Flux;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -15,6 +17,8 @@ class Listing extends Component
     public $groups;
 
     private $user;
+
+    public Group $group;
 
     public function mount()
     {
@@ -37,5 +41,22 @@ class Listing extends Component
     public function edit(int $id)
     {
         $this->dispatch('edit-group', $id);
+    }
+
+    public function delete(int $id)
+    {
+        $this->group = Group::find($id);
+        Flux::modal('delete-group')->show();
+    }
+
+    public function destroy()
+    {
+        $this->group->delete();
+
+        $this->dispatch('refresh-groups-listing');
+
+        Flux::toast(variant: 'success', heading: 'Group', text: 'Your group have been deleted.');
+
+        Flux::modal('delete-group')->close();
     }
 }
