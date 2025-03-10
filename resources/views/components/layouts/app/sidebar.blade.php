@@ -20,6 +20,10 @@
 
                 <flux:navlist.item icon="building-office-2" :href="route('groups.index')"
                     :current="request()->routeIs('groups.index')" wire:navigate>{{ __('Groups') }}</flux:navlist.item>
+
+                <flux:navlist.item icon="users" :href="route('members.index')"
+                    :current="request()->routeIs('members.index')" wire:navigate>{{ __('Members') }}
+                </flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
 

@@ -78,14 +78,14 @@ class Group extends Model
 
     public function my_role(): RoleUser
     {
-        if (Cache::has('role_user_'.Auth::user()->id)) {
-            return Cache::get('role_user_'.Auth::user()->id);
+        if (Cache::has('role_user_'.Auth::user()->id.'_'.$this->id)) {
+            return Cache::get('role_user_'.Auth::user()->id.'_'.$this->id);
         }
         $role_string = $this->users()->wherePivot('user_id', Auth::user()->id)->first()->pivot->role;
         $role_enum = RoleUser::from($role_string);
 
         // put in cache for 1 hour
-        Cache::put('role_user_'.Auth::user()->id, $role_enum, 3600);
+        Cache::put('role_user_'.Auth::user()->id.'_'.$this->id, $role_enum, 3600);
 
         return $role_enum;
 

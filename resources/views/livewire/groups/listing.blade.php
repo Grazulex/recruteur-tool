@@ -3,7 +3,7 @@
         class="max-w-7xl px-6 sm:px-8 py-3 mx-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-2">
         <div class="flex items-baseline gap-3">
             <flux:heading size="xl" level="1">{{ __('Groups') }}</flux:heading>
-            <flux:subheading size="lg" class="mb-6">{{ __('Manage your groups and invitations') }}</flux:subheading>
+            <flux:subheading size="lg" class="mb-6">{{ __('Manage your groups') }}</flux:subheading>
         </div>
         <flux:spacer />
         <flux:modal.trigger name="create-group">

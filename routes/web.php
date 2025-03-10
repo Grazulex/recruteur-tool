@@ -17,6 +17,10 @@ Route::view('groups', 'pages.groups')
     ->middleware(['auth', 'verified'])
     ->name('groups.index');
 
+Route::view('members', 'pages.members')
+    ->middleware(['auth', 'verified'])
+    ->name('members.index');
+
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 

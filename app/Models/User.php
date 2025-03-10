@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\GroupType;
+use App\Enums\RoleUser;
 use App\Traits\CreateDefaultGroupTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 /**
@@ -123,5 +126,28 @@ class User extends Authenticatable implements MustVerifyEmail
                 columns: 'role'
             )
             ->withTimestamps();
+    }
+
+    public function usersInMyAdminGroups()
+    {
+        return User::join('group_user as gu1', 'users.id', '=', 'gu1.user_id')
+            ->join('groups', 'gu1.group_id', '=', 'groups.id')
+            ->join('group_user as gu2', 'gu1.group_id', '=', 'gu2.group_id')
+            ->where('gu2.user_id', Auth::user()->id)
+            ->where('gu2.role', RoleUser::ADMIN)
+            ->where('users.id', '!=', Auth::user()->id)
+            ->select('users.*', 'groups.id as group_id', 'groups.name as group_name', 'groups.group_type as group_type', 'gu1.role as user_role')
+            ->distinct()
+            ->get()
+            ->map(function ($user) {
+                $user->user_role = RoleUser::tryFrom($user->user_role); // Convertir en Enum
+
+                return $user;
+            })
+            ->map(function ($user) {
+                $user->group_type = GroupType::tryFrom($user->group_type); // Convertir en Enum
+
+                return $user;
+            });
     }
 }
