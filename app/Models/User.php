@@ -140,12 +140,8 @@ class User extends Authenticatable implements MustVerifyEmail
             ->distinct()
             ->get()
             ->map(function ($user) {
-                $user->user_role = RoleUser::tryFrom($user->user_role); // Convertir en Enum
-
-                return $user;
-            })
-            ->map(function ($user) {
-                $user->group_type = GroupType::tryFrom($user->group_type); // Convertir en Enum
+                $user->user_role = RoleUser::tryFrom($user->user_role);
+                $user->group_type = GroupType::tryFrom($user->group_type);
 
                 return $user;
             });
